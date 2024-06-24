@@ -12,17 +12,25 @@ if [ -z "${NONINTERACTIVE:-}" ]; then
 		apt_get_quiet install dialog file python3 python3-pip  || exit 1
 	fi
 
-	# Installing email_validator is repeated in setup/management.sh, but in setup/management.sh
-	# we install it inside a virtualenv. In this script, we don't have the virtualenv yet
-	# so we install the python package globally.
-	hide_output pip3 install "email_validator>=1.0.0" || exit 1
-
 	message_box "Mail-in-a-Box Installation" \
 		"Hello and thanks for deploying a (Power) Mail-in-a-Box!
 		\n\nI'm going to ask you a few questions.
 		\n\nTo change your answers later, just run 'sudo mailinabox' from the command line.
 		\n\nNOTE: You should only install this on a brand new Debian/Ubuntu installation 100% dedicated to Mail-in-a-Box. Mail-in-a-Box will, for example, remove apache2."
 fi
+
+setup_dir=/usr/local/lib/setup
+mkdir -p $setup_dir
+setup_venv=$setup_dir/env
+if [ ! -d $setup_venv ]; then
+	hide_output virtualenv -ppython3 $setup_venv
+fi
+
+# Installing email_validator is repeated in setup/management.sh, but in setup/management.sh
+# we install it inside a virtualenv. In this script, we don't have the virtualenv yet
+# so we install the python package globally.
+hide_output $venv/bin/pip install --upgrade "email_validator>=1.0.0" || exit 1
+
 
 # The box needs a name.
 if [ -z "${PRIMARY_HOSTNAME:-}" ]; then
@@ -51,7 +59,7 @@ you really want.
 			# user hit ESC/cancel
 			exit
 		fi
-		while ! python3 management/mailconfig.py validate-email "$EMAIL_ADDR"
+		while ! $setup_venv/bin/python3 management/mailconfig.py validate-email "$EMAIL_ADDR"
 		do
 			input_box "Your Email Address" \
 				"That's not a valid email address.\n\nWhat email address are you setting this box up to manage?" \
