@@ -19,7 +19,6 @@ if [ ! -f /usr/bin/lsb_release ]; then
 		echo "This script must be run on a system running one of the following OS-es:"
 		echo "* Debian 10 (buster)"
 		echo "* Debian 11 (bullseye)"
-		echo "* Debian 12 (bookworm)"
 		echo "* Ubuntu 20.04 LTS (Focal Fossa)"
 		echo "* Ubuntu 22.04 LTS (Jammy Jellyfish)"
 		exit 1
@@ -34,7 +33,6 @@ if [ -z "$TAG" ]; then
 	# Make sure we're running on the correct operating system
 	OS=$(lsb_release -d | sed 's/.*:\s*//')
 	if  [ "$OS" == "Debian GNU/Linux 11 (bullseye)" ] ||
-	        [ "$OS" == "Debian GNU/Linux 12 (bookworm)" ] ||
 		[ "$(echo $OS | grep -o 'Ubuntu 20.04')" == "Ubuntu 20.04" ] ||
 		[ "$(echo $OS | grep -o 'Ubuntu 22.04')" == "Ubuntu 22.04" ]
 	then
@@ -69,7 +67,6 @@ if [ -z "$TAG" ]; then
 		TAG=v56.5
 	else
 		echo "This script must be run on a system running one of the following OS-es:"
-		echo "* Debian 12 (bookworm)"
 		echo "* Debian 11 (bullseye)"
 		echo "* Ubuntu 20.04 LTS (Focal Fossa)"
 		echo "* Ubuntu 22.04 LTS (Jammy Jellyfish)"

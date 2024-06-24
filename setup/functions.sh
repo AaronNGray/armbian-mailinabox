@@ -233,6 +233,7 @@ export OS_UNSUPPORTED=0
 export OS_DEBIAN_10=1
 export OS_UBUNTU_2004=2
 export OS_DEBIAN_11=3
+export OS_debian_12=3
 export OS_UBUNTU_2204=4
 
 function get_os_code {
@@ -247,6 +248,9 @@ function get_os_code {
 		elif [[ $VER == "11" ]]; then
 			echo $OS_DEBIAN_11
 			return 0
+                elif [[ $VER == "12" ]]; then
+                        echo $OS_DEBIAN_12
+                        return 0
 		fi
 	elif [[ $ID == "Ubuntu" ]]; then
 		if [[ $VER == "20.04" ]]; then

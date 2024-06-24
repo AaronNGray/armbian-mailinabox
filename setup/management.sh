@@ -16,15 +16,20 @@ echo "Installing Mail-in-a-Box system management daemon..."
 # gcc and build tools are required to install the latest version
 # of duplicity
 apt_install python3-pip python3-gpg virtualenv certbot rsync librsync2 python3-fasteners python3-future python3-lockfile \
-			gcc python3-dev librsync-dev gettext
+			gcc python3-dev librsync-dev gettext libjpeg-dev
 
 apt_get_quiet remove --autoremove --purge duplicity || /bin/true
+
+pip install --upgrade pip
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Duplicity does the actual backups.
 # b2sdk is used for backblaze backups.
 # boto3 is used for amazon aws backups.
 # Both are installed outside the pipenv, so they can be used by duplicity
-hide_output pip3 install --upgrade b2sdk boto3 duplicity
+hide_output pip3 install --upgrade bcrypt b2sdk boto3 "typer<0.5.0,>=0.4.1" "tomli<3.0.0,>=2.0.1" "rich<13.0.0,>=12.4.4" "httpx<0.24.0,>=0.23.0" "anyio<4.0.0,>=3.6.1" "nala" duplicity
+
 
 # Create a virtualenv for the installation of Python 3 packages
 # used by the management daemon.
