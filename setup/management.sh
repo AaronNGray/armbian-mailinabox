@@ -20,8 +20,6 @@ apt_install python3-pip python3-gpg virtualenv certbot rsync librsync2 python3-f
 
 apt_get_quiet remove --autoremove --purge duplicity || /bin/true
 
-pip install --upgrade pip
-
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Duplicity does the actual backups.
