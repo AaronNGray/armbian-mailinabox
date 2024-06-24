@@ -346,6 +346,7 @@ fi
 # installing bind9 or else apt won't be able to resolve a server to
 # download bind9 from.
 rm -f /etc/resolv.conf
+touch /etc/systemd/resolved.conf
 management/editconf.py /etc/systemd/resolved.conf DNSStubListener=no
 echo "nameserver 127.0.0.1" > /etc/resolv.conf
 
