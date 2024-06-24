@@ -126,8 +126,12 @@ source setup/web.sh
 source setup/webmail.sh
 source setup/nextcloud.sh
 source setup/zpush.sh
+echo "1"
 source setup/management.sh
+echo "2"
 source setup/munin.sh
+echo "3"
+
 
 # Create a shorthand alias for the cli interface
 cat > /usr/local/sbin/miabadm << EOF;
@@ -144,17 +148,23 @@ do
 	sleep 2
 done
 
+echo "4"
+
 # ...and then have it write the DNS and nginx configuration files and start those
 # services.
 tools/dns_update
+echo "5"
 tools/web_update
+echo "6"
 
 # Give fail2ban another restart. The log files may not all have been present when
 # fail2ban was first configured, but they should exist now.
 restart_service fail2ban
+echo "7"
 
 # If there aren't any mail users yet, create one.
 source setup/firstuser.sh
+echo "8"
 
 # Register with Let's Encrypt, including agreeing to the Terms of Service.
 # We'd let certbot ask the user interactively, but when this script is
