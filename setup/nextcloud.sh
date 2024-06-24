@@ -376,7 +376,7 @@ include("$STORAGE_ROOT/owncloud/config.php");
 \$CONFIG['overwrite.cli.url'] = '/cloud';
 \$CONFIG['mail_from_address'] = 'administrator'; # just the local part, matches our master administrator address
 
-\$CONFIG['logtimezone'] = '$TIMEZONE';
+\$CONFIG['logtimez one'] = '$TIMEZONE';
 \$CONFIG['logdateformat'] = 'Y-m-d H:i:s';
 
 \$CONFIG['mail_domain'] = '$PRIMARY_HOSTNAME';
@@ -403,8 +403,8 @@ chown www-data.www-data $STORAGE_ROOT/owncloud/config.php
 # and calendar apps are the extensions we really care about here.
 hide_output sudo -u www-data php /usr/local/lib/owncloud/console.php app:disable firstrunwizard
 #hide_output sudo -u www-data php /usr/local/lib/owncloud/console.php app:enable user_external
-hide_output sudo -u www-data php /usr/local/lib/owncloud/console.php app:enable contacts
-hide_output sudo -u www-data php /usr/local/lib/owncloud/console.php app:enable calendar
+#hide_output sudo -u www-data php /usr/local/lib/owncloud/console.php app:enable contacts
+#hide_output sudo -u www-data php /usr/local/lib/owncloud/console.php app:enable calendar
 
 # When upgrading, run the upgrade script again now that apps are enabled. It seems like
 # the first upgrade at the top won't work because apps may be disabled during upgrade?
@@ -436,6 +436,8 @@ management/editconf.py /etc/php/$(php_version)/cli/conf.d/10-opcache.ini -c ';' 
 	opcache.memory_consumption=128 \
 	opcache.save_comments=1 \
 	opcache.revalidate_freq=1
+
+
 
 # Migrate users_external data from <0.6.0 to version 3.0.0 (see https://github.com/nextcloud/user_external).
 # This version was probably in use in Mail-in-a-Box v0.41 (February 26, 2019) and earlier.
