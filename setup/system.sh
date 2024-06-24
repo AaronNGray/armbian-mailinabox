@@ -339,6 +339,9 @@ if ! grep -q "max-recursion-queries " /etc/bind/named.conf.options; then
 	sed -i "s/^}/\n\tmax-recursion-queries 100;\n}/" /etc/bind/named.conf.options
 fi
 
+
+sudo apt-get install systemd-resolved
+
 # First we'll disable systemd-resolved's management of resolv.conf and its stub server.
 # Breaking the symlink to /run/systemd/resolve/stub-resolv.conf means
 # systemd-resolved will read it for DNS servers to use. Put in 127.0.0.1,
