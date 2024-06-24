@@ -22,6 +22,7 @@ source setup/functions.sh # load our functions
 echo "Installing SpamAssassin..."
 apt_install spampd razor pyzor dovecot-antispam libmail-dkim-perl
 
+touch /etc/default/spamassassin
 # Allow spamassassin to download new rules.
 management/editconf.py /etc/default/spamassassin \
 	CRON=1
@@ -194,4 +195,3 @@ chmod 770 $STORAGE_ROOT/mail/spamassassin
 # Kick services.
 restart_service spampd
 restart_service dovecot
-
