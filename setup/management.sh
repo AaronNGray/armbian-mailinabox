@@ -7,6 +7,9 @@ echo "Installing Mail-in-a-Box system management daemon..."
 
 # DEPENDENCIES
 
+sudo apt-get install libxml2-dev libxslt-dev libffi-dev libjpeg-dev
+
+
 # virtualenv is used to isolate the Python 3 packages we
 # install via pip from the system-installed packages.
 #
