@@ -56,14 +56,13 @@ hide_output $venv/bin/pip install --upgrade pip
 # Both are installed outside the pipenv, so they can be used by duplicity
 hide_output $venv/bin/pip install --upgrade bcrypt b2sdk boto3 "typer<0.5.0,>=0.4.1" "tomli<3.0.0,>=2.0.1" "rich<13.0.0,>=12.4.4" "httpx<0.24.0,>=0.23.0" "anyio<4.0.0,>=3.6.1" "nala" duplicity
 
-
 # Install other Python 3 packages used by the management daemon.
 # The first line is the packages that Josh maintains himself!
 # NOTE: email_validator is repeated in setup/questions.sh, so please keep the versions synced.
 hide_output $venv/bin/pip install --upgrade \
 	rtyaml "email_validator>=1.0.0" "exclusiveprocess" \
 	flask dnspython python-dateutil expiringdict gunicorn \
-	qrcode[pil] pyotp \
+	qrcode[pil] pyotp pyopenssl \
 	"idna" "cryptography" boto psutil postfix-mta-sts-resolver boto3 b2sdk
 
 # Make the venv use the packaged gpgme bindings (the ones pip provides are severely out-of-date)
